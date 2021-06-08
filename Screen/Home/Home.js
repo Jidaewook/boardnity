@@ -7,7 +7,7 @@ import COLORS from '../../consts/colors';
 import {MaterialIcons} from '@expo/vector-icons';
 import { ScrollView } from 'react-native-gesture-handler';
 import CategoryList from '../../components/CategoryList';
-import Card from '../../components/Card';
+import {Card, Button, Paragraph, Title} from 'react-native-paper';
 
 const cardWidth = width / 1.8;
 const {width} = Dimensions.get('screen');
@@ -66,13 +66,18 @@ const Home = () => {
                     categoryIndex={selectCategoryIndex}     
                     set={setSelectCategoryIndex}               
                 />
-                <View>
+                <ScrollView horizontal style={{marginTop: 10}} >
                     {movies.map(item => (
-                        <Text>
-                            {item.title}
-                        </Text>
+                        <Card style={{margin: 5, width: 250, borderWidth: 1}}>
+                            <Card.Cover source={{uri: `https://image.tmdb.org/t/p/w500${item.poster_path}`}} />
+                            <Card.Title title={item.title} subtitle={item.release_date} />
+                            <Card.Content>
+                                <Title>{item.title}</Title>
+                                <Paragraph>{item.overview.slice(0, 100)}</Paragraph>
+                            </Card.Content>
+                        </Card>
                     ))}
-                </View>
+                </ScrollView>
             </ScrollView>
             
         </SafeAreaView>
