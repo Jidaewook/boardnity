@@ -1,37 +1,39 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import Home from './Screen/Home';
 import axios from 'axios';
 
-const [movie, setMovie] = useState([]);
+import {View, Text} from 'react-native';
 
-const getMovie = async() => {
-  axios.get('https://api.themoviedb.org/3/movie/550?api_key=262cfbaa555730595d97bf7a4c956d2a')
-    .then(res => {
-      console.log(res.data.results)
-    })
-    .catch(err => {
-      console.log(err)
-    })
-}
+const App = () => {
 
-useEffect(() => {
-  getMovie()
-}, []);
+  // 상태선언
+  const [movie, setMovie] = useState([]);
+  // 함수선언
+  const getData = async() => {
+    axios.get('https://api.themoviedb.org/3/movie/now_playing?api_key=262cfbaa555730595d97bf7a4c956d2a&language=en-US&page=1')
+      .then(res => {
+        console.log("11112451234123412341234123412341234", res.data.results)
+        setMovie(res.data.results);
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
 
-export default function App() {
+  useEffect(() => {
+    getData()
+  }, [])
+
+
   return (
-    <View style={styles.container}>
-      <Text>Hello World</Text>
+    <View style={{alignItems: 'center', justifyContent: 'center'}}>
+      {movie.map(item => (
+        <Text>
+          {item.title}
+        </Text>
+        
+      ))}
     </View>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
