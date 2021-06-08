@@ -1,9 +1,15 @@
 import React, {useEffect, useState} from 'react';
-import {Text, View, StyleSheet, } from 'react-native';
+import {Text, View, StyleSheet, TouchableOpacity, } from 'react-native';
 
 import axios from 'axios';
+import {useNavigation} from '@react-navigation/native';
+
+
 
 const Home = () => {
+
+    const navigation = useNavigation();
+
 
     const [movies, setMovies] = useState([])
 
@@ -29,6 +35,15 @@ const Home = () => {
                     {item.title}
                 </Text>
             ))}
+            
+            <TouchableOpacity 
+                onPress = {() => navigation.push("Detail")}
+                
+            >
+                <Text>
+                    go To Detail
+                </Text>
+            </TouchableOpacity>
         </View>
     );
 };
