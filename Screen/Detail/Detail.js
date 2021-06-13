@@ -1,14 +1,19 @@
 import React from 'react';
 import {View, Text} from 'react-native';
+import axios from 'axios';
 
 
-const Detail = () => {
+const Detail = ({}) => {
+
+    console.log('++++++++++', parmas.id)
+
     return (
-        <View>
+        <View style={{alignItems: 'center', justifyContent: 'center'}}>
             <Text>
-                Detail
+                {id}
             </Text>
         </View>
+        
     );
 };
 

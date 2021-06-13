@@ -17,24 +17,47 @@ const Home = () => {
     const navigation = useNavigation();
 
     const [movies, setMovies] = useState([])
+    const [bests, setBests] = useState([])
+    const [bbs, setBbs] = useState([])
 
-    const categories = ['All', 'Upcoming', 'Popular', 'Toprated', 'Best', 'Worst'];
+    const categories = ['모두보기', 'NCS', 'PSAT', '고득점특강', '채용공고', '물뿌리개'];
     const [selectCategoryIndex, setSelectCategoryIndex] = useState(0)
     const [activeCardIndex, setActiveCardIndex] = useState(0)
     const scrollX = useRef(new Animated.Value(0)).current;
 
     const getMovie = async() => 
-        axios.get('https://api.themoviedb.org/3/movie/now_playing?api_key=262cfbaa555730595d97bf7a4c956d2a&language=en-US&page=1')
+        axios.get('http://passme-env.eba-fkpnrszj.us-east-2.elasticbeanstalk.com/ncs')
             .then(res => {
-                console.log(res)
                 setMovies(res.data.results)
+                console.log(res.data.results)
             })
             .catch(err => {
                 console.log(err)
             });
 
+    const getBest = async() => 
+        axios.get('http://passme-env.eba-fkpnrszj.us-east-2.elasticbeanstalk.com/psat')
+            .then(res => {
+                setBests(res.data.results)
+            })
+            .cathch(err => {
+                console.log(err)
+            })
+
+    const getBbs = async() => 
+        axios.get('http://passme-env.eba-fkpnrszj.us-east-2.elasticbeanstalk.com/bbs')
+            .then(res => {
+                setBbs(res.data.results)
+            })
+            .catch(err => {
+                console.log(err)
+            })
+
+
     useEffect(() => {
-        getMovie()
+        getMovie(),
+        getBest(),
+        getBbs()
     }, [])
     
 
@@ -66,15 +89,60 @@ const Home = () => {
                     categoryIndex={selectCategoryIndex}     
                     set={setSelectCategoryIndex}               
                 />
+                <Text style={{fontSize: 20, fontWeight: 'bold', marginTop: 15, marginLeft: 10}}>
+                    NCS 강좌
+                </Text>
                 <ScrollView horizontal style={{marginTop: 10}} >
                     {movies.map(item => (
                         <Card style={{margin: 5, width: 250, borderWidth: 1}}>
-                            <Card.Cover source={{uri: `https://image.tmdb.org/t/p/w500${item.poster_path}`}} />
-                            <Card.Title title={item.title} subtitle={item.release_date} />
+                            {/* <Card.Cover source={{uri: `https://image.tmdb.org/t/p/w500${item.poster_path}`}} /> */}
+                            <Card.Title style={styles.cardTitle} title={item.title} subtitle={item.genres_ids} />
                             <Card.Content>
-                                <Title>{item.title}</Title>
-                                <Paragraph>{item.overview.slice(0, 100)}</Paragraph>
+                                <Title style={{fontSize: 12}}>{item.desc.slice(0, 20)}</Title>
+                                {/* <Paragraph>{item.overview.slice(0, 100)}</Paragraph> */}
                             </Card.Content>
+                            <Card.Actions>
+                                <Button onPress={() => navigation.navigate('Detail')}>자세히보기</Button>
+
+                            </Card.Actions>
+                        </Card>
+                    ))}
+                </ScrollView>
+                <Text style={{fontSize: 20, fontWeight: 'bold', marginTop: 15, marginLeft: 10}}>
+                    PSAT 강좌
+                </Text>
+                <ScrollView horizontal style={{marginTop: 10}}>
+                    {bests.map(item => (
+                        <Card style={{margin: 5, width: 250, borderWidth: 1}}>
+                            {/* <Card.Cover source={{uri: `https://image.tmdb.org/t/p/w500/${item.poster_path}`}}/> */}
+                            <Card.Title style={styles.cardTitle} title={item.title} subtitle={item.genres_ids} />
+                            <Card.Content>
+                                <Title style={{fontSize: 12}}>{item.desc.slice(0, 20)}</Title>
+                                {/* <Paragraph>{item.overview.slice(0, 50)}</Paragraph> */}
+                            </Card.Content>
+                            
+                            <Card.Actions>
+                                <Button onPress={() => navigation.navigate('Detail', {id: item.id})}>자세히보기</Button>
+                            </Card.Actions>
+                        </Card>
+                    ))}
+                </ScrollView>
+                <Text style={{fontSize: 20, fontWeight: 'bold', marginTop: 15, marginLeft: 10}}>
+                    자유게시판
+                </Text>
+                <ScrollView horizontal style={{marginTop: 10}}>
+                    {bbs.map(item => (
+                        <Card style={{margin: 5, width: 250, borderWidth: 1}}>
+                            {/* <Card.Cover source={{uri: `https://image.tmdb.org/t/p/w500/${item.poster_path}`}}/> */}
+                            <Card.Title style={styles.cardTitle} title={item.title} subtitle={item.tag} />
+                            <Card.Content>
+                                <Title style={{fontSize: 12}}>{item.desc.slice(0, 20)}</Title>
+                                {/* <Paragraph>{item.overview.slice(0, 50)}</Paragraph> */}
+                            </Card.Content>
+                            
+                            <Card.Actions>
+                                <Button onPress={() => navigation.navigate('Detail', {id: item.id})}>자세히보기</Button>
+                            </Card.Actions>
                         </Card>
                     ))}
                 </ScrollView>
@@ -104,5 +172,10 @@ const styles = StyleSheet.create({
 
         flexDirection: 'row',
         alignItems: 'center'
+    },
+    cardTitle: {
+        fontSize: 14,
+        fontWeight: 'bold',
+
     }
 })
