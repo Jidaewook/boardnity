@@ -122,7 +122,9 @@ const Home = () => {
                             </Card.Content>
                             
                             <Card.Actions>
-                                <Button onPress={() => navigation.navigate('Detail', {id: item.id})}>자세히보기</Button>
+                                {/* <Button onPress={() => navigation.navigate('Detail', {id: item.id})}>자세히보기</Button> */}
+                                <Button onPress={() => navigation.navigate('Detail2')}>자세히보기</Button>
+
                             </Card.Actions>
                         </Card>
                     ))}
