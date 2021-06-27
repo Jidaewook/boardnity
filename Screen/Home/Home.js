@@ -26,32 +26,32 @@ const Home = () => {
     const scrollX = useRef(new Animated.Value(0)).current;
 
     const getMovie = async() => 
-        axios.get('http://passme-env.eba-fkpnrszj.us-east-2.elasticbeanstalk.com/ncs')
-            .then(res => {
-                setMovies(res.data.results)
-                console.log(res.data.results)
-            })
-            .catch(err => {
-                console.log(err)
-            });
+       await axios.get('http://passme-env.eba-fkpnrszj.us-east-2.elasticbeanstalk.com/ncs')
+                .then(res => {
+                    setMovies(res.data.results)
+                    console.log(res.data.results)
+                })
+                .catch(err => {
+                    console.log(err)
+                });
 
     const getBest = async() => 
-        axios.get('http://passme-env.eba-fkpnrszj.us-east-2.elasticbeanstalk.com/psat')
-            .then(res => {
-                setBests(res.data.results)
-            })
-            .cathch(err => {
-                console.log(err)
-            })
+        await axios.get('http://passme-env.eba-fkpnrszj.us-east-2.elasticbeanstalk.com/psat')
+                .then(res => {
+                    setBests(res.data.results)
+                })
+                .cathch(err => {
+                    console.log(err)
+                })
 
     const getBbs = async() => 
-        axios.get('http://passme-env.eba-fkpnrszj.us-east-2.elasticbeanstalk.com/bbs')
-            .then(res => {
-                setBbs(res.data.results)
-            })
-            .catch(err => {
-                console.log(err)
-            })
+        await axios.get('http://passme-env.eba-fkpnrszj.us-east-2.elasticbeanstalk.com/bbs')
+                .then(res => {
+                    setBbs(res.data.results)
+                })
+                .catch(err => {
+                    console.log(err)
+                })
 
 
     useEffect(() => {
@@ -66,18 +66,20 @@ const Home = () => {
             <View style={styles.header}>
                 <View style={{paddingBottom: 15}}>
                     <Text style={{fontSize: 30, fontWeight: 'bold'}}>
-                        Find Your Movie
+                        Find Your Lecture
                     </Text>
                     <View style={{flexDirection: 'row'}}>
                         <Text style={{fontSize: 30, fontWeight: 'bold'}}>
                             in{" "}
                         </Text>
                         <Text style={{fontSize: 30, fontWeight: 'bold', color: COLORS.primary}}>
-                            TMDB
+                            PASSME
                         </Text>
                     </View>
                 </View>
-                <MaterialIcons name={"person-outline"} size={32} color={COLORS.gray} />
+                <TouchableOpacity onPress={() => navigation.navigate('Mypage')} >
+                    <MaterialIcons name={"person-outline"} size={32} color={COLORS.gray} />
+                </TouchableOpacity>
             </View>
             <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={styles.searchInputContainer}>
@@ -102,7 +104,7 @@ const Home = () => {
                                 {/* <Paragraph>{item.overview.slice(0, 100)}</Paragraph> */}
                             </Card.Content>
                             <Card.Actions>
-                                <Button onPress={() => navigation.navigate('Detail')}>자세히보기</Button>
+                                <Button onPress={() => navigation.navigate('Detail', {id: item._id})}>자세히보기</Button>
 
                             </Card.Actions>
                         </Card>
