@@ -18,8 +18,20 @@ export default () => {
                     headerShown: false
                 }}
             />
-            <ProfileStack.Screen name="Setting" component={Setting} />
-            <ProfileStack.Screen name="Detail" component={Detail} />
+            <ProfileStack.Screen 
+                name="Setting" 
+                component={Setting} 
+                options={{
+                    headerShown: false
+                }} 
+            />
+            <ProfileStack.Screen 
+                name="Detail" 
+                component={Detail} 
+                options={{
+                    headerShown: false
+                }} 
+            />
         </ProfileStack.Navigator>
     )
 }

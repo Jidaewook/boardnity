@@ -35,8 +35,8 @@ export default () => {
                 }
             })}
         >
-            <Tabs.Screen name="Category" component={CategoryStack} />
             <Tabs.Screen name="Home" component={HomeStack} />
+            <Tabs.Screen name="Category" component={CategoryStack} />
             <Tabs.Screen name="Recommend" component={RecommendStack} />
             <Tabs.Screen name="Profile" component={ProfileStack} />
         </Tabs.Navigator>

@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useRef} from 'react';
-import {Text, View, StyleSheet, TouchableOpacity, SafeAreaView, Dimensions, TextInput, FlatList, Animated} from 'react-native';
+import {Text, View, StyleSheet, TouchableOpacity, SafeAreaView, Dimensions, TextInput, FlatList, Animated, ActivityIndicator} from 'react-native';
 
 import axios from 'axios';
 import {useNavigation} from '@react-navigation/native';
@@ -8,6 +8,7 @@ import {MaterialIcons} from '@expo/vector-icons';
 import { ScrollView } from 'react-native-gesture-handler';
 import CategoryList from '../../components/CategoryList';
 import {Card, Button, Paragraph, Title} from 'react-native-paper';
+import Section from '../../components/Section';
 
 const cardWidth = width / 1.8;
 const {width} = Dimensions.get('screen');
@@ -19,6 +20,7 @@ const Home = () => {
     const [movies, setMovies] = useState([])
     const [bests, setBests] = useState([])
     const [bbs, setBbs] = useState([])
+    const [loading, setLoading] = useState(true);
 
     const categories = ['모두보기', 'NCS', 'PSAT', '고득점특강', '채용공고', '물뿌리개'];
     const [selectCategoryIndex, setSelectCategoryIndex] = useState(0)
@@ -29,7 +31,9 @@ const Home = () => {
        await axios.get('http://passme-env.eba-fkpnrszj.us-east-2.elasticbeanstalk.com/ncs')
                 .then(res => {
                     setMovies(res.data.results)
+                    setLoading(false)
                     console.log(res.data.results)
+
                 })
                 .catch(err => {
                     console.log(err)
@@ -66,7 +70,7 @@ const Home = () => {
             <View style={styles.header}>
                 <View style={{paddingBottom: 15}}>
                     <Text style={{fontSize: 30, fontWeight: 'bold'}}>
-                        Find Your Lecture
+                        Find Your Life
                     </Text>
                     <View style={{flexDirection: 'row'}}>
                         <Text style={{fontSize: 30, fontWeight: 'bold'}}>
@@ -81,7 +85,8 @@ const Home = () => {
                     <MaterialIcons name={"person-outline"} size={32} color={COLORS.gray} />
                 </TouchableOpacity>
             </View>
-            <ScrollView showsVerticalScrollIndicator={false}>
+                {loading ? <ActivityIndicator color={COLORS.black} />: 
+                <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={styles.searchInputContainer}>
                     <MaterialIcons name={"search"} size={28} style={{marginLeft: 20}} />
                     <TextInput placeholder={"Search"} style={{fontSize: 20, paddingLeft: 10}} />
@@ -91,9 +96,8 @@ const Home = () => {
                     categoryIndex={selectCategoryIndex}     
                     set={setSelectCategoryIndex}               
                 />
-                <Text style={{fontSize: 20, fontWeight: 'bold', marginTop: 15, marginLeft: 10}}>
-                    NCS 강좌
-                </Text>
+               
+                <Section title={"NCS 강좌"} onPress={() => navigation.navigate("NcsSectionStack")} />
                 <ScrollView horizontal style={{marginTop: 10}} >
                     {movies.map(item => (
                         <Card style={{margin: 5, width: 250, borderWidth: 1}}>
@@ -103,16 +107,14 @@ const Home = () => {
                                 <Title style={{fontSize: 12}}>{item.desc.slice(0, 20)}</Title>
                                 {/* <Paragraph>{item.overview.slice(0, 100)}</Paragraph> */}
                             </Card.Content>
-                            <Card.Actions>
+                            <Card.Actions style={{marginLeft: 150}}>
                                 <Button onPress={() => navigation.navigate('Detail', {id: item._id})}>자세히보기</Button>
 
                             </Card.Actions>
                         </Card>
                     ))}
                 </ScrollView>
-                <Text style={{fontSize: 20, fontWeight: 'bold', marginTop: 15, marginLeft: 10}}>
-                    PSAT 강좌
-                </Text>
+                <Section title={"PSAT 강좌"} onPress={() => navigation.navigate("PsatSectionStack")} />
                 <ScrollView horizontal style={{marginTop: 10}}>
                     {bests.map(item => (
                         <Card style={{margin: 5, width: 250, borderWidth: 1}}>
@@ -123,7 +125,7 @@ const Home = () => {
                                 {/* <Paragraph>{item.overview.slice(0, 50)}</Paragraph> */}
                             </Card.Content>
                             
-                            <Card.Actions>
+                            <Card.Actions  style={{marginLeft: 150}}>
                                 {/* <Button onPress={() => navigation.navigate('Detail', {id: item.id})}>자세히보기</Button> */}
                                 <Button onPress={() => navigation.navigate('Detail2')}>자세히보기</Button>
 
@@ -131,9 +133,7 @@ const Home = () => {
                         </Card>
                     ))}
                 </ScrollView>
-                <Text style={{fontSize: 20, fontWeight: 'bold', marginTop: 15, marginLeft: 10}}>
-                    자유게시판
-                </Text>
+                <Section title={"자유게시판"} onPress={() => navigation.navigate("BoardSectionStack")} />
                 <ScrollView horizontal style={{marginTop: 10}}>
                     {bbs.map(item => (
                         <Card style={{margin: 5, width: 250, borderWidth: 1}}>
@@ -144,14 +144,14 @@ const Home = () => {
                                 {/* <Paragraph>{item.overview.slice(0, 50)}</Paragraph> */}
                             </Card.Content>
                             
-                            <Card.Actions>
+                            <Card.Actions style={{marginLeft: 150}}>
                                 <Button onPress={() => navigation.navigate('Detail', {id: item.id})}>자세히보기</Button>
                             </Card.Actions>
                         </Card>
                     ))}
                 </ScrollView>
             </ScrollView>
-            
+            }
         </SafeAreaView>
         
     );

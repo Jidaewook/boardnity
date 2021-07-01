@@ -9,8 +9,20 @@ const RecommendStack = createStackNavigator();
 export default () => {
     return (
         <RecommendStack.Navigator>
-            <RecommendStack.Screen name="Recommend" component={Recommend} />
-            <RecommendStack.Screen name="Detail" component={Detail} />
+            <RecommendStack.Screen 
+                name="Recommend" 
+                component={Recommend} 
+                options={{
+                    headerShown: false
+                }} 
+            />
+            <RecommendStack.Screen 
+                name="Detail" 
+                component={Detail} 
+                options={{
+                    headerShown: false
+                }} 
+            />
         </RecommendStack.Navigator>
     );
 };
