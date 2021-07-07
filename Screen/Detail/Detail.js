@@ -82,7 +82,7 @@ const Detail = ({route}) => {
                         <Text
                             style={styles.CommentFirst}
                         >
-                            {Detail.title}
+                            {/* {Detail.title} */}
                         </Text>
                         <View>
                             {/* <Text>

@@ -7,13 +7,15 @@ import {AntDesign} from '@expo/vector-icons';
 import {COLORS, theme} from '../../consts';
 import { useNavigation } from '@react-navigation/core';
 
-import {Card, Button, Title} from 'react-native-paper';
+import {Card, Button, Title, Paragraph} from 'react-native-paper';
 
 const Mypage = () => {
     const navigation = useNavigation();
 
     const [recent, setRecent] = useState([])
     const [likes, setLikes] = useState([])
+
+
 
     const getRecent = async() => 
         await axios.get(`http://passme-env.eba-fkpnrszj.us-east-2.elasticbeanstalk.com/ncs`)
@@ -38,8 +40,8 @@ const Mypage = () => {
                     imageStyle={styles.profileBackground}
                 >
                     <View style={styles.editGear}>
-                        <AntDesign name="edit" size={24} color={COLORS.primary} />
-                        <AntDesign name="setting" seize={24} color={COLORS.primary}  />                        
+                        <AntDesign name="edit" size={24} color={COLORS.white} onPress={() => navigation.navigate("MyPageEdit")} />
+                        <AntDesign name="setting" size={24} color={COLORS.white} onPress={() => navigation.navigate("Setting")} />                        
                     </View>
                     <ScrollView
                         showsVerticalScrollIndicator={false}
@@ -110,10 +112,17 @@ const Mypage = () => {
                                 </View>
                                 <ScrollView horizontal={true} style={{marginTop: 10}} showsHorizontalScrollIndicator={false}>
                                     {recent.map(item => (
-                                        <Card stlye={{margin: 5, width: 250, borderWidth: 1}}>
-                                            <Card.Title style={styles.cardTitle} title={item.title} subtitle={item.genres_ids}  />
+                                        <Card style={{margin: 10, width: 250, borderWidth: 1}}>
+                                            <Card.Cover source={require('../../assets/favicon.png')} />
                                             <Card.Content>
-                                                {/* <Title></Title> */}
+
+                                                <Title>
+                                                    {item.title.length > 10 ? `${item.title.slice(0, 10)}...` : item.title }
+                                                </Title>
+
+                                                <Paragraph>
+                                                    {item.genres_ids}
+                                                </Paragraph>
                                             </Card.Content>
                                         </Card>
                                     ))}
@@ -150,7 +159,7 @@ const styles = StyleSheet.create({
         marginLeft: 20,
         marginRight: 15,
         flexDirection: 'row',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
     },
     profileCard: {
         display: 'flex',

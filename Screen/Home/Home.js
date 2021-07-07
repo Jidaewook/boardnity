@@ -69,20 +69,20 @@ const Home = () => {
         <SafeAreaView style={{flex: 1, backgroundColor: COLORS.white}}>
             <View style={styles.header}>
                 <View style={{paddingBottom: 15}}>
-                    <Text style={{fontSize: 30, fontWeight: 'bold'}}>
-                        Find Your Life
+                    <Text style={{fontSize: 30, fontWeight: 'bold', color: COLORS.white}}>
+                        Dreams Come true
                     </Text>
                     <View style={{flexDirection: 'row'}}>
-                        <Text style={{fontSize: 30, fontWeight: 'bold'}}>
+                        <Text style={{fontSize: 30, fontWeight: 'bold', color: COLORS.gray2}}>
                             in{" "}
                         </Text>
-                        <Text style={{fontSize: 30, fontWeight: 'bold', color: COLORS.primary}}>
+                        <Text style={{fontSize: 30, fontWeight: 'bold', color: COLORS.tertiary}}>
                             PASSME
                         </Text>
                     </View>
                 </View>
                 <TouchableOpacity onPress={() => navigation.navigate('Mypage')} >
-                    <MaterialIcons name={"person-outline"} size={32} color={COLORS.gray} />
+                    <MaterialIcons name={"person-outline"} size={32} color={COLORS.white} />
                 </TouchableOpacity>
             </View>
                 {loading ? <ActivityIndicator color={COLORS.black} />: 
@@ -91,11 +91,11 @@ const Home = () => {
                     <MaterialIcons name={"search"} size={28} style={{marginLeft: 20}} />
                     <TextInput placeholder={"Search"} style={{fontSize: 20, paddingLeft: 10}} />
                 </View>
-                <CategoryList 
+                {/* <CategoryList 
                     categories={categories}
                     categoryIndex={selectCategoryIndex}     
                     set={setSelectCategoryIndex}               
-                />
+                /> */}
                
                 <Section title={"NCS 강좌"} onPress={() => navigation.navigate("NcsSectionStack")} />
                 <ScrollView horizontal style={{marginTop: 10}} >
@@ -161,10 +161,13 @@ export default Home;
 
 const styles = StyleSheet.create({
     header: {
-        marginTop: 20,
+        marginTop: 10,
+        paddingTop: 20,
+        paddingBottom: 5,
         flexDirection: 'row',
         justifyContent: 'space-between',
-        paddingHorizontal: 20
+        paddingHorizontal: 20,
+        backgroundColor: COLORS.main3
     },
     searchInputContainer: {
         height: 50,
@@ -173,7 +176,6 @@ const styles = StyleSheet.create({
         marginLeft: 20,
         borderTopLeftRadius: 30,
         borderBottomLeftRadius: 30,
-
         flexDirection: 'row',
         alignItems: 'center'
     },

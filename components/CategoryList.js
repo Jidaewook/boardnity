@@ -17,8 +17,8 @@ const CategoryList = ({categories, set, categoryIndex}) => {
                                 ...styles.categoryListText,
                                 color: 
                                     categoryIndex == index
-                                        ? COLORS.primary
-                                        : COLORS.gray 
+                                        ? COLORS.main5
+                                        : COLORS.main1 
                             }}
                         >
                             {item}
@@ -28,7 +28,7 @@ const CategoryList = ({categories, set, categoryIndex}) => {
                                 style={{
                                     height: 4, 
                                     width: 20, 
-                                    backgroundColor: COLORS.primary, 
+                                    backgroundColor: COLORS.main4, 
                                     marginTop: 10
                                 }}
                             />

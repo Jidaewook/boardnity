@@ -10,6 +10,7 @@ import PsatSectionStack from './sectionStack/PsatSectionStack';
 import BoardSectionStack from './sectionStack/BoardSectionStack';
 
 import BackBtn from '../components/BackBtn';
+import { COLORS } from '../consts';
 
 const HomeStack = createStackNavigator();
 
@@ -19,7 +20,7 @@ export default () => {
       screenOptions={{
         headerBackTitleVisible: false,
         headerTransparent: true,
-        headerBackImage: () => <BackBtn />
+        headerBackImage: () => <BackBtn />,
       }}
       initialRouteName="Main"
     >
@@ -27,7 +28,7 @@ export default () => {
         name="Home" 
         component={Home} 
         options={{
-          headerShown: false,
+          headerShown: false
         }} 
         
       />
@@ -51,8 +52,6 @@ export default () => {
         options={{
           headerTitle: 'NCS 게시판',
           headerTransparent: false,
-
-
         }}   
       />
       <HomeStack.Screen 

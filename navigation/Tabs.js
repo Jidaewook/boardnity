@@ -28,7 +28,7 @@ export default () => {
                     return (
                         <Feather 
                             name={iconName}
-                            color={focused ? COLORS.primary : COLORS.secondary}
+                            color={focused ? COLORS.main4 : COLORS.main1}
                             size={theme.sizes.h1}
                         />
                     )
