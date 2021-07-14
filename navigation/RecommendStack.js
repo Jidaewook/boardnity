@@ -1,8 +1,8 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 
-import Recommend from '../screen/recommend/Recommend';
-import Detail from '../screen/detail/Detail';
+import Recommend from '../Screen/recommend/Recommend';
+import Detail from '../Screen/Detail/Detail';
 
 const RecommendStack = createStackNavigator();
 

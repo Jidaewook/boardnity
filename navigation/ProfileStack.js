@@ -2,10 +2,10 @@ import React from 'react';
 import {View, Text} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
 
-import Mypage from '../screen/profile/Mypage';
-import Setting from '../screen/profile/Setting';
-import Detail from '../screen/detail/Detail';
-import MyPageEdit from '../screen/profile/MyPageEdit';
+import Mypage from '../Screen/profile/Mypage';
+import Setting from '../Screen/profile/Setting';
+import Detail from '../Screen/Detail/Detail';
+import MyPageEdit from '../Screen/profile/MyPageEdit';
 import BackBtn from '../components/BackBtn';
 
 

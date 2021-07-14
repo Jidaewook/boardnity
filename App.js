@@ -4,8 +4,8 @@ import {createStackNavigator} from '@react-navigation/stack';
 
 import Tabs from './navigation/Tabs';
 
-import Home from './screen/home/Home';
-import Detail from './screen/detail/Detail';
+// import Home from './Screen/Home/Home';
+// import Detail from './screen/detail/Detail';
 
 const Stack = createStackNavigator();
 

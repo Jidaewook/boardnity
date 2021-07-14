@@ -2,9 +2,9 @@ import React from 'react';
 import {View, Text} from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import Category from '../screen/category/Category';
-import Favorite from '../screen/category/Favorite';
-import Detail from '../screen/detail/Detail';
+import Category from '../Screen/category/Category';
+import Favorite from '../Screen/category/Favorite';
+import Detail from '../Screen/Detail/Detail';
 
 const CategoryStack = createStackNavigator();
 

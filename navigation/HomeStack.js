@@ -2,8 +2,8 @@ import React from 'react';
 import {View, Text} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
 
-import Home from '../screen/home/Home';
-import Detail from '../screen/detail/Detail';
+import Home from '../Screen/Home/Home';
+import Detail from '../Screen/Detail/Detail';
 import ProfileStack from '../navigation/ProfileStack';
 import NcsSectionStack from './sectionStack/NcsSectionStack';
 import PsatSectionStack from './sectionStack/PsatSectionStack';

@@ -32,8 +32,16 @@ export default () => {
                             size={theme.sizes.h1}
                         />
                     )
-                }
+                },
             })}
+            tabBarOptions={{
+                activeTintColor: COLORS.main4,
+                inactiveTintColor: COLORS.main1,
+                showLabel: true,
+                labelStyle: {
+                    fontSize: 14               
+                },
+            }}
         >
             <Tabs.Screen name="Home" component={HomeStack} />
             <Tabs.Screen name="Category" component={CategoryStack} />
